@@ -1,25 +1,98 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LandingPage from "./components/LandingPage";
+import Registration from "./components/Registration";
+import LoginPage from "./components/LoginPage";
+import Dashboard from "./components/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
+import PublicRoute from "./components/PublicRoute.js";
+import DashboardLayout from "./components/DashboardLayout.js";
+import MenSection from "./components/MenSection/index.js";
+import WomenSection from "./components/WomenSection/index.js";
+import KidsSection from "./components/KidsSection/index.js";
+import ProductDetailPage from "./components/ProductDetailPage/index.js";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <PublicRoute>
+              <LandingPage />
+            </PublicRoute>
+          }
+        ></Route>
+        <Route
+          path="/register"
+          element={
+            <PublicRoute>
+              <Registration />
+            </PublicRoute>
+          }
+        ></Route>
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <LoginPage />
+            </PublicRoute>
+          }
+        ></Route>
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <DashboardLayout>
+                <Dashboard />
+              </DashboardLayout>
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/men"
+          element={
+            <ProtectedRoute>
+              <DashboardLayout>
+                <MenSection />
+              </DashboardLayout>
+            </ProtectedRoute>
+          }
+        ></Route>
+        <Route
+          path="/women"
+          element={
+            <ProtectedRoute>
+              <DashboardLayout>
+                <WomenSection />
+              </DashboardLayout>
+            </ProtectedRoute>
+          }
+        ></Route>
+         <Route
+          path="/kids"
+          element={
+            <ProtectedRoute>
+              <DashboardLayout>
+                <KidsSection />
+              </DashboardLayout>
+            </ProtectedRoute>
+          }
+        ></Route>
+        <Route
+          path="/product/:id"
+          element={
+            <ProtectedRoute>
+              <DashboardLayout>
+                <ProductDetailPage />
+              </DashboardLayout>
+            </ProtectedRoute>
+          }
+        ></Route>
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;

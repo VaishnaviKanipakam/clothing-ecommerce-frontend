@@ -1,0 +1,13 @@
+.women-section-container{
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    overflow: scroll;
+    scrollbar-width: none;
+    margin-top: 70px;
+    padding: 40px;
+}
