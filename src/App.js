@@ -10,6 +10,7 @@ import MenSection from "./components/MenSection/index.js";
 import WomenSection from "./components/WomenSection/index.js";
 import KidsSection from "./components/KidsSection/index.js";
 import ProductDetailPage from "./components/ProductDetailPage/index.js";
+import Cart from "./components/Cart"
 
 const App = () => {
   return (
@@ -86,6 +87,16 @@ const App = () => {
             <ProtectedRoute>
               <DashboardLayout>
                 <ProductDetailPage />
+              </DashboardLayout>
+            </ProtectedRoute>
+          }
+        ></Route>
+        <Route
+          path="/cart"
+          element={
+            <ProtectedRoute>
+              <DashboardLayout>
+                <Cart />
               </DashboardLayout>
             </ProtectedRoute>
           }

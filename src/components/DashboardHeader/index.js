@@ -58,12 +58,15 @@ const DashboardHeader = () => {
       </ul>
 
       <div className="flex items-center space-x-6">
+        <Link to="/cart">
         <IconButton sx={{ p: 0 }}>
           <div className="relative flex items-center justify-center">
             <ShoppingCartIcon sx={{ color: "#ffffff", fontSize: "25px" }} />
             <CartBadge badgeContent={2} overlap="circular" />
           </div>
         </IconButton>
+        </Link>
+        
 
         <Avatar
           sx={{
