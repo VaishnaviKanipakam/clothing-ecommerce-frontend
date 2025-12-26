@@ -1,7 +1,7 @@
 import CustomButton from "../CustomButton";
 import { Link } from "react-router-dom";
 
-import "./index.css";
+import "./index.css"; 
 
 const MenSectionProductItems = (props) => {
   const { productDetails } = props;

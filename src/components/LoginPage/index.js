@@ -123,7 +123,7 @@ const LoginPage = () => {
           </Link>
         </p>
       </form>
-    </div>
+    </div> 
   );
 };
 

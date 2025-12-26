@@ -31,7 +31,7 @@ const DashboardHeader = () => {
     navigate("/login");
   };
 
-  return (
+  return ( 
     <div className="dashboard-header-container">
       <img
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDs0jsNaC9eXkdpnEboYBdxz0c6x_-pLxc4w&s"

@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import ProductDetailedPageItem from "../ProductDetailedPageItem";
 
 import "./index.css";
-
+ 
 const ProductDetailPage = () => {
   const { id } = useParams();
   console.log("8ProductDetailPage", id);
