@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import Badge, { badgeClasses } from "@mui/material/Badge";
@@ -8,6 +8,7 @@ import CustomButton from "../CustomButton";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import "./index.css";
+import { useState } from "react";
 
 const CartBadge = styled(Badge)`
   & .${badgeClasses.badge} {
@@ -21,9 +22,12 @@ const CartBadge = styled(Badge)`
 
 const DashboardHeader = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const activePath = location.pathname;
   const user = JSON.parse(localStorage.getItem("user"));
   console.log("22DashboardHeader", user.result[0].name);
   const name = user?.result?.[0]?.name || "U";
+  // const [activeTab, setActiveTab] = useState("")
 
   const onClickLogoutButton = () => {
     localStorage.removeItem("user");
@@ -31,7 +35,7 @@ const DashboardHeader = () => {
     navigate("/login");
   };
 
-  return ( 
+  return (
     <div className="dashboard-header-container">
       <img
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDs0jsNaC9eXkdpnEboYBdxz0c6x_-pLxc4w&s"
@@ -40,46 +44,71 @@ const DashboardHeader = () => {
       />
 
       <ul className="flex flex-row items-center space-x-4 list-none">
-        <Link to="/dashboard" className="no-underline">
-          <li className="text-white font-semibold text-base">Home</li>
+        <Link to="/dashboard" className={`no-underline`}>
+          <li
+            className={`text-white font-semibold text-base ${
+              activePath === "/dashboard" ? "underline underline-offset-4" : ""
+            }`}
+          >
+            Home
+          </li>
         </Link>
 
         <Link to="/men" className="no-underline">
-          <li className="text-white font-semibold text-base">Men</li>
+          <li
+            className={`text-white font-semibold text-base ${
+              activePath === "/men" ? "underline underline-offset-4" : ""
+            }`}
+          >
+            Men
+          </li>
         </Link>
 
         <Link to="/women" className="no-underline">
-          <li className="text-white font-semibold text-base">Women</li>
+          <li
+            className={`text-white font-semibold text-base ${
+              activePath === "/women" ? "underline underline-offset-4" : ""
+            }`}
+          >
+            Women
+          </li>
         </Link>
 
         <Link to="/kids" className="no-underline">
-          <li className="text-white font-semibold text-base">Kids</li>
+          <li
+            className={`text-white font-semibold text-base ${
+              activePath === "/kids" ? "underline underline-offset-4" : ""
+            }`}
+          >
+            Kids
+          </li>
         </Link>
       </ul>
 
-      <div className="flex items-center space-x-6">
+      <div className="flex items-center space-x-6 box-border">
         <Link to="/cart">
-        <IconButton sx={{ p: 0 }}>
-          <div className="relative flex items-center justify-center">
-            <ShoppingCartIcon sx={{ color: "#ffffff", fontSize: "25px" }} />
-            <CartBadge badgeContent={2} overlap="circular" />
-          </div>
-        </IconButton>
+            <IconButton sx={{ p: 0 }}>
+              <div className="relative flex items-center justify-center box-border">
+                <ShoppingCartIcon sx={{ color: "#ffffff", fontSize: "25px" }} />
+                <CartBadge badgeContent={2} overlap="circular" />
+              </div>
+            </IconButton>
         </Link>
-        
 
-        <Avatar
-          sx={{
-            backgroundColor: "#ffffff",
-            color: "#000000",
-            fontSize: "18px",
-            fontWeight: "bold",
-            width: 38,
-            height: 38,
-          }}
-        >
-          {name[0].toUpperCase()}
-        </Avatar>
+        <Link to="/my-plofile" className="no-underline">
+            <Avatar
+              sx={{
+                backgroundColor: "#ffffff",
+                color: "#000000",
+                fontSize: "18px",
+                fontWeight: "bold",
+                width: 38,
+                height: 38,
+              }}
+            >
+              {name[0].toUpperCase()}
+            </Avatar>
+        </Link>
 
         <CustomButton
           onClick={onClickLogoutButton}

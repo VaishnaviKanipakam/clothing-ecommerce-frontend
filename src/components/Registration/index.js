@@ -98,7 +98,7 @@ const Registration = () => {
     const response = await fetch(url, options)
     console.log("89RegistraionResponse", response)
     if (response.ok === true) {
-      const successData = response.json();
+      const successData = await response.json();
       onSubmitSuccess();
       setSuccessMessage(successData);
       setMessage(true);

@@ -11,9 +11,15 @@ import WomenSection from "./components/WomenSection/index.js";
 import KidsSection from "./components/KidsSection/index.js";
 import ProductDetailPage from "./components/ProductDetailPage/index.js";
 import Cart from "./components/Cart"
+import MyProfilePage from "./components/MyProfilePage/index.js";
+import { useState } from "react";
+import CartContext from "./context/CartContext.js";
 
 const App = () => {
+  const [cartCount, setCartCount] = useState(0)
+
   return (
+  <CartContext.Provider value={{cartCount, setCartCount}}>
     <BrowserRouter>
       <Routes>
         <Route
@@ -91,7 +97,8 @@ const App = () => {
             </ProtectedRoute>
           }
         ></Route>
-        <Route
+        
+            <Route
           path="/cart"
           element={
             <ProtectedRoute>
@@ -101,8 +108,19 @@ const App = () => {
             </ProtectedRoute>
           }
         ></Route>
+        <Route
+          path="/my-plofile"
+          element={
+            <ProtectedRoute>
+              <DashboardLayout>
+                <MyProfilePage />
+              </DashboardLayout>
+            </ProtectedRoute>
+          }
+        ></Route>
       </Routes>
     </BrowserRouter>
+    </CartContext.Provider>
   );
 };
 
