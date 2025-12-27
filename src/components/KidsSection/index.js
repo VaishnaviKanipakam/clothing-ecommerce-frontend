@@ -7,7 +7,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import "./index.css";
 
 const KidsSection = () => {
-  const [getProductsList, setGetProductsList] = useState([]); 
+  const [getProductsList, setGetProductsList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const jwtToken = Cookies.get("jwt_token");
 
@@ -59,28 +59,30 @@ const KidsSection = () => {
         onChange={(e) => setSearchInput(e.target.value)}
         icon={<SearchIcon sx={{ fontSize: "20px" }} />}
       />
-    ); 
+    );
   };
 
-  return getProductsList.length === 0 ? (
-    <div className="flex flex-col items-center justify-center h-full w-full">
-      <h1 className="text-black font-bold text-[30px] mt-5">Loading...</h1>
-    </div>
-  ) : (
+  return (
     <div className="kids-section-container">
       <div className="flex flex-row items-center justify-between w-full">
         <h1 className="text-black font-bold text-[30px] mt-5">Kids Section</h1>
         <div>{renderSearchInputField()}</div>
       </div>
 
-      <ul className="list-none grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-[50px]">
-        {filteredResult.map((eachProduct) => (
-          <KidsSectionProductItems
-            key={eachProduct.productId}
-            productDetails={eachProduct}
-          />
-        ))}
-      </ul>
+      {getProductsList.length === 0 ? (
+        <div className="flex flex-col items-center justify-center h-full w-full">
+          <h1 className="text-black font-bold text-[30px] mt-5">Loading...</h1>
+        </div>
+      ) : (
+        <ul className="list-none grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-[50px]">
+          {filteredResult.map((eachProduct) => (
+            <KidsSectionProductItems
+              key={eachProduct.productId}
+              productDetails={eachProduct}
+            />
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
