@@ -25,7 +25,7 @@ const ProductDetailedPageItem = (props) => {
   const sizes = productSize.split(",");
 
   const onAddProductToCart = async () => {
-    const url = `http://localhost:5000/cart`;
+    const url = `https://clothing-ecommerce-backend-f011.onrender.com/cart`;
     const productInformation = {
       userId,
       productId,

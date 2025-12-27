@@ -12,7 +12,7 @@ const KidsSection = () => {
   const jwtToken = Cookies.get("jwt_token");
 
   const getAllProducts = async () => {
-    const url = `http://localhost:5000/products?product_category=Kids`;
+    const url = `https://clothing-ecommerce-backend-f011.onrender.com/products?product_category=Kids`;
 
     const options = {
       method: "GET",

@@ -37,7 +37,7 @@ const Cart = () => {
   };
 
   const getcartItems = async () => {
-    const url = `http://localhost:5000/cart_items?user_id=${userId}`;
+    const url = `https://clothing-ecommerce-backend-f011.onrender.com/cart_items?user_id=${userId}`;
 
     const options = {
       method: "GET",
@@ -121,7 +121,7 @@ const Cart = () => {
       phoneNumber,
       address,
     };
-    const url = `http://localhost:5000/order?user_id=${userId}`;
+    const url = `https://clothing-ecommerce-backend-f011.onrender.com/order?user_id=${userId}`;
 
     const options = {
       method: "POST",

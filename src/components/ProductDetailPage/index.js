@@ -11,7 +11,7 @@ const ProductDetailPage = () => {
   const jwtToken = Cookies.get("jwt_token");
 
   const getSingleProductData = async () => {
-    const url = `http://localhost:5000/product?product_id=${id}`;
+    const url = `https://clothing-ecommerce-backend-f011.onrender.com/product?product_id=${id}`;
 
     const options = {
       method: "GET",

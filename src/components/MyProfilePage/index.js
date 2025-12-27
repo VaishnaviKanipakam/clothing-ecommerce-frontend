@@ -12,7 +12,7 @@ const MyProfilePage = () => {
   const [allOrdersList, setAllOrdersList] = useState([]);
 
   const getOrdersList = async () => {
-    const url = `http://localhost:5000/get_orders?user_id=${userId}`;
+    const url = `https://clothing-ecommerce-backend-f011.onrender.com/get_orders?user_id=${userId}`;
 
     const options = {
       method: "GET",

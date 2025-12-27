@@ -52,7 +52,7 @@ const LoginPage = () => {
   const onSubmitLoginForm = async (event) => {
     event.preventDefault();
     const loginDetails = { password, email };
-    const url = "http://localhost:5000/login";
+    const url = "https://clothing-ecommerce-backend-f011.onrender.com/login";
 
     const options = {
       method: "POST",

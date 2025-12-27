@@ -25,7 +25,7 @@ const CartItem = (props) => {
 
   const updateCartItem = async () => {
     const cartUpdateDetails = { productQuantityCount };
-    const url = `http://localhost:5000/update_cart_item?user_id=${userId}&cart_id=${cartId}&product_id=${productId}&product_category=${productCategory}`;
+    const url = `https://clothing-ecommerce-backend-f011.onrender.com/update_cart_item?user_id=${userId}&cart_id=${cartId}&product_id=${productId}&product_category=${productCategory}`;
 
     const options = {
       method: "PUT",
@@ -43,7 +43,7 @@ const CartItem = (props) => {
   };
 
   const deleteCartItem = async () => {
-    const url = `http://localhost:5000/delete_cart_item?user_id=${userId}&cart_id=${cartId}&product_id=${productId}&product_category=${productCategory}`;
+    const url = `https://clothing-ecommerce-backend-f011.onrender.com/delete_cart_item?user_id=${userId}&cart_id=${cartId}&product_id=${productId}&product_category=${productCategory}`;
 
     const options = {
       method: "DELETE",

@@ -11,7 +11,7 @@ const DashboardLayout = ({ children }) => {
   const userId = user?.result?.[0]?.user_id;
 
   const getCartItemsCount = async () => {
-    const url = `http://localhost:5000/cart_items_count?user_id=${userId}`;
+    const url = `https://clothing-ecommerce-backend-f011.onrender.com/cart_items_count?user_id=${userId}`;
 
     const options = {
       method: "GET",

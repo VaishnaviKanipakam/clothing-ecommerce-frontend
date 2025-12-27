@@ -12,7 +12,7 @@ const WomenSection = () => {
   const jwtToken = Cookies.get("jwt_token");
 
   const getAllProducts = async () => {
-    const url = `http://localhost:5000/products?product_category=Women`;
+    const url = `https://clothing-ecommerce-backend-f011.onrender.com/products?product_category=Women`;
 
     const options = {
       method: "GET",

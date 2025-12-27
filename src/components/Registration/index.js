@@ -81,7 +81,7 @@ const Registration = () => {
 
   const onSubmitRegistrationForm = async (event) => {
     event.preventDefault();
-    const url = "http://localhost:5000/registration";
+    const url = "https://clothing-ecommerce-backend-f011.onrender.com/registration";
     const userDetails = { name, email, password, confirmPassword };
 
     const options = {
