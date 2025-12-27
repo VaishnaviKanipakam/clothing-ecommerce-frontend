@@ -1,7 +1,7 @@
 .dashboard-header-container {
-    position: fixed;
-    top: 0;
-    left: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
   height: 80px;
   width: 100%;
   display: flex;
@@ -9,7 +9,7 @@
   justify-content: space-between;
   background-color: black;
   padding: 0 24px;
-   z-index: 999;
+  z-index: 999;
 }
 
 .logo-img {

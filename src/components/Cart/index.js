@@ -25,8 +25,6 @@ const Cart = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const userId = user?.result?.[0]?.user_id;
   const jwtToken = Cookies.get("jwt_token");
-  // const [emptyMessage, setEmptyMessage] = useState("")
-  // const [trueOrFalse, setTrueOrFalse] = useState(null)
 
   const [open, setOpen] = useState(false);
 
@@ -50,15 +48,8 @@ const Cart = () => {
       },
     };
     const response = await fetch(url, options);
-    console.log("24CartResponse", response);
-    // if(response.ok === true && response.cart_items == []){
-    //   const emptyMessage = await response.json()
-    //   setTrueOrFalse(true)
-    //   setEmptyMessage(emptyMessage)
-    // }
     if (response.ok === true) {
       const data = await response.json();
-      console.log("27CartData", data);
       const updatedData = data.map((eachItem) => ({
         userId: eachItem.user_id,
         cartId: eachItem.cart_id,
@@ -143,7 +134,6 @@ const Cart = () => {
     };
 
     const postOrderDetailsResponse = await fetch(url, options);
-    console.log("144CartpostOrderDetailsResponse", postOrderDetailsResponse);
     if (postOrderDetailsResponse.ok === true) {
       const successData = await postOrderDetailsResponse.json();
       setSuccessMessage(successData);
@@ -156,8 +146,6 @@ const Cart = () => {
       setErrorMessage(errorData);
       setMessage(false);
     }
-
-    // handleClose();
   };
 
   useEffect(() => {
@@ -165,11 +153,9 @@ const Cart = () => {
   }, []);
 
   return getCartItemsList.length === 0 ? (
-  //  return trueOrFalse ? (
     <div className="cart-container">
       <h1 className="text-[30px] font-bold text-[#000000] mt-8 mb-8">
         No Productd Found
-        {/* {emptyMessage.mssage} */}
       </h1>
       <Link to="/dashboard">
         <CustomButton>Continue to Shop</CustomButton>
@@ -197,7 +183,11 @@ const Cart = () => {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Order Details</DialogTitle>
         <DialogContent>
-          <form onSubmit={onSubmitOrderDetailsForm} id="subscription-form" className="w-[400px] flex flex-col items-center jus\">
+          <form
+            onSubmit={onSubmitOrderDetailsForm}
+            id="subscription-form"
+            className="w-[400px] flex flex-col items-center jus\"
+          >
             <div>{renderNameField()}</div>
             <div>{renderPhoneNumberField()}</div>
             <div>{renderAddressField()}</div>
@@ -207,15 +197,14 @@ const Cart = () => {
               </h1>
             </div>
             <div className="box-border text-center w-full">
-                <p
-              className={`text-base mt-2 font-bold ${
-                message ? "text-green-500" : "text-red-500"
-              }`}
-            >
-              {message ? successMessage : errorMessage}
-            </p>
+              <p
+                className={`text-base mt-2 font-bold ${
+                  message ? "text-green-500" : "text-red-500"
+                }`}
+              >
+                {message ? successMessage : errorMessage}
+              </p>
             </div>
-            
           </form>
         </DialogContent>
         <DialogActions>

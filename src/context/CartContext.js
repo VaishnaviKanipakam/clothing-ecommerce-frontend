@@ -1,5 +1,9 @@
-import { createContext } from "react"
+import { createContext } from "react";
 
-const CartContext = createContext()
+const CartContext = createContext({
+  cartCount: 0,
+  setCartCount: () => {},
+  getCartItemsCount: () => {},
+});
 
-export default CartContext
+export default CartContext;

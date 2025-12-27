@@ -4,10 +4,9 @@ import Cookies from "js-cookie";
 import ProductDetailedPageItem from "../ProductDetailedPageItem";
 
 import "./index.css";
- 
+
 const ProductDetailPage = () => {
   const { id } = useParams();
-  console.log("8ProductDetailPage", id);
   const [getProductData, setGetProductData] = useState([]);
   const jwtToken = Cookies.get("jwt_token");
 
@@ -23,10 +22,8 @@ const ProductDetailPage = () => {
       },
     };
     const response = await fetch(url, options);
-    console.log("27ProductDetailPageResponse", response);
     if (response.ok === true) {
       const data = await response.json();
-      console.log("30ProductDetailPageData", data);
       const updatedData = data.map((eachProduct) => ({
         productId: eachProduct.product_id,
         productCategory: eachProduct.product_category,
@@ -46,12 +43,17 @@ const ProductDetailPage = () => {
   }, []);
 
   return (
-  <div className="product-detail-page-container">
-          <h1 className="text-[30px] font-bold text-[#000000] mt-8 mb-8">Product Details</h1>
-    {getProductData.map((product) => (
-      <ProductDetailedPageItem key={product.productId} productDetails={product}/>
-    ))}
-  </div>
+    <div className="product-detail-page-container">
+      <h1 className="text-[30px] font-bold text-[#000000] mt-8 mb-8">
+        Product Details
+      </h1>
+      {getProductData.map((product) => (
+        <ProductDetailedPageItem
+          key={product.productId}
+          productDetails={product}
+        />
+      ))}
+    </div>
   );
 };
 

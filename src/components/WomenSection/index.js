@@ -6,9 +6,8 @@ import SearchIcon from "@mui/icons-material/Search";
 
 import "./index.css";
 
-
 const WomenSection = () => {
-   const [getProductsList, setGetProductsList] = useState([]);
+  const [getProductsList, setGetProductsList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const jwtToken = Cookies.get("jwt_token");
 
@@ -25,10 +24,8 @@ const WomenSection = () => {
     };
 
     const response = await fetch(url, options);
-    console.log("25MenSectionRsponse", response);
     if (response.ok === true) {
       const data = await response.json();
-      console.log("28MenSection", data);
       const updatedData = data.map((eachProduct) => ({
         productId: eachProduct.product_id,
         productCategory: eachProduct.product_category,
@@ -47,21 +44,22 @@ const WomenSection = () => {
     getAllProducts();
   }, []);
 
-  const filteredResult = getProductsList.filter(eachProduct => (
-    eachProduct.productName.toLowerCase().includes(searchInput.toLocaleLowerCase())
-  ))
+  const filteredResult = getProductsList.filter((eachProduct) =>
+    eachProduct.productName
+      .toLowerCase()
+      .includes(searchInput.toLocaleLowerCase())
+  );
 
   const renderSearchInputField = () => {
-    return(
-        <CustomInput
-      type="search"
-      value={searchInput}
-      placeholder="Product Name"
-      onChange={(e) => setSearchInput(e.target.value)}
-      icon={<SearchIcon sx={{ fontSize: "20px" }} />}
-    />
-    )
-    
+    return (
+      <CustomInput
+        type="search"
+        value={searchInput}
+        placeholder="Product Name"
+        onChange={(e) => setSearchInput(e.target.value)}
+        icon={<SearchIcon sx={{ fontSize: "20px" }} />}
+      />
+    );
   };
   return (
     <div className="women-section-container">
@@ -79,7 +77,7 @@ const WomenSection = () => {
         ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default WomenSection
+export default WomenSection;

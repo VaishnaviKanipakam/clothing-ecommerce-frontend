@@ -1,7 +1,8 @@
 import CustomButton from "../CustomButton";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import CartContext from "../../context/CartContext";
 import Cookies from "js-cookie";
 
 const CartItem = (props) => {
@@ -20,16 +21,7 @@ const CartItem = (props) => {
   const jwtToken = Cookies.get("jwt_token");
   const [productQuantityCount, setProductQuantityCount] =
     useState(productQuantity);
-
-  // const onClickIncreaseProductQuantity = () => {
-  //   setProductQuantityCount((prev) => prev + 1);
-  // };
-
-  // const onClickDecreaseProductQuantity = () => {
-    // if (productQuantityCount > 1) {
-    // setProductQuantityCount((prev) => prev - 1);
-    // }
-  // };
+  const { getCartItemsCount } = useContext(CartContext);
 
   const updateCartItem = async () => {
     const cartUpdateDetails = { productQuantityCount };
@@ -45,7 +37,6 @@ const CartItem = (props) => {
       body: JSON.stringify(cartUpdateDetails),
     };
     const updateCartItemResponse = await fetch(url, options);
-    console.log("49CartItem", updateCartItemResponse);
     if (updateCartItemResponse.ok === true) {
       getcartItems();
     }
@@ -63,16 +54,15 @@ const CartItem = (props) => {
       },
     };
 
-    const deleteCartItemResponse = await fetch(url, options)
-    console.log("67CartItemdeleteCartItemResponse", deleteCartItemResponse)
-    if(deleteCartItemResponse.ok === true){
-      getcartItems()
+    const deleteCartItemResponse = await fetch(url, options);
+    if (deleteCartItemResponse.ok === true) {
+      getcartItems();
+      getCartItemsCount();
     }
   };
 
   const totalPrice = Number(productPrice) * productQuantityCount;
 
-  
   useEffect(() => {
     if (Number(productQuantityCount) === 0) {
       deleteCartItem();

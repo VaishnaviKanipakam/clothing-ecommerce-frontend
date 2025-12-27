@@ -24,10 +24,8 @@ const KidsSection = () => {
     };
 
     const response = await fetch(url, options);
-    console.log("25MenSectionRsponse", response);
     if (response.ok === true) {
       const data = await response.json();
-      console.log("28MenSection", data);
       const updatedData = data.map((eachProduct) => ({
         productId: eachProduct.product_id,
         productCategory: eachProduct.product_category,

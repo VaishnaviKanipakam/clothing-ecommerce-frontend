@@ -1,4 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
+import { useContext } from "react";
+import CartContext from "../../context/CartContext";
 import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import Badge, { badgeClasses } from "@mui/material/Badge";
@@ -8,7 +10,6 @@ import CustomButton from "../CustomButton";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import "./index.css";
-import { useState } from "react";
 
 const CartBadge = styled(Badge)`
   & .${badgeClasses.badge} {
@@ -21,13 +22,12 @@ const CartBadge = styled(Badge)`
 `;
 
 const DashboardHeader = () => {
+  const { cartCount } = useContext(CartContext);
   const navigate = useNavigate();
   const location = useLocation();
   const activePath = location.pathname;
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log("22DashboardHeader", user.result[0].name);
   const name = user?.result?.[0]?.name || "U";
-  // const [activeTab, setActiveTab] = useState("")
 
   const onClickLogoutButton = () => {
     localStorage.removeItem("user");
@@ -87,27 +87,27 @@ const DashboardHeader = () => {
 
       <div className="flex items-center space-x-6 box-border">
         <Link to="/cart">
-            <IconButton sx={{ p: 0 }}>
-              <div className="relative flex items-center justify-center box-border">
-                <ShoppingCartIcon sx={{ color: "#ffffff", fontSize: "25px" }} />
-                <CartBadge badgeContent={2} overlap="circular" />
-              </div>
-            </IconButton>
+          <IconButton sx={{ p: 0 }}>
+            <div className="relative flex items-center justify-center box-border">
+              <ShoppingCartIcon sx={{ color: "#ffffff", fontSize: "25px" }} />
+              <CartBadge badgeContent={cartCount} overlap="circular" />
+            </div>
+          </IconButton>
         </Link>
 
         <Link to="/my-plofile" className="no-underline">
-            <Avatar
-              sx={{
-                backgroundColor: "#ffffff",
-                color: "#000000",
-                fontSize: "18px",
-                fontWeight: "bold",
-                width: 38,
-                height: 38,
-              }}
-            >
-              {name[0].toUpperCase()}
-            </Avatar>
+          <Avatar
+            sx={{
+              backgroundColor: "#ffffff",
+              color: "#000000",
+              fontSize: "18px",
+              fontWeight: "bold",
+              width: 38,
+              height: 38,
+            }}
+          >
+            {name[0].toUpperCase()}
+          </Avatar>
         </Link>
 
         <CustomButton

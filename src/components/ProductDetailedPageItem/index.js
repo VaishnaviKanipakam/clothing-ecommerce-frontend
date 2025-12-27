@@ -1,19 +1,16 @@
 import CustomButton from "../CustomButton";
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import Cookies from "js-cookie";
-
-
-
-import "./index.css";
+import CartContext from "../../context/CartContext";
 
 const ProductDetailedPageItem = (props) => {
   const { productDetails } = props;
-  const [selectedProductSize, setSelectedProductSize] = useState(null)
+  const [selectedProductSize, setSelectedProductSize] = useState(null);
   const jwtToken = Cookies.get("jwt_token");
   const user = JSON.parse(localStorage.getItem("user"));
-  const userId =  user?.result?.[0]?.user_id
-  console.log("14ProductDetailedPageItem", userId)
-  
+  const userId = user?.result?.[0]?.user_id;
+  const { getCartItemsCount } = useContext(CartContext);
+
   const {
     productId,
     productCategory,
@@ -26,30 +23,36 @@ const ProductDetailedPageItem = (props) => {
   } = productDetails;
 
   const sizes = productSize.split(",");
-  
+
   const onAddProductToCart = async () => {
-    console.log("23ProductDetailedPageItem", "item added")
-    const url = `http://localhost:5000/cart`
-    const productInformation = {userId, productId, productCategory, productImage, productName, productPrice, selectedProductSize}
+    const url = `http://localhost:5000/cart`;
+    const productInformation = {
+      userId,
+      productId,
+      productCategory,
+      productImage,
+      productName,
+      productPrice,
+      selectedProductSize,
+    };
 
     const options = {
-        method: "POST",
-        headers: {
+      method: "POST",
+      headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         Authorization: `Bearer ${jwtToken}`,
       },
-      body: JSON.stringify(productInformation)
+      body: JSON.stringify(productInformation),
+    };
+    const response = await fetch(url, options);
+    if (response.ok === true) {
+      getCartItemsCount();
     }
-    const response = await fetch(url, options)
-    console.log("44ProductDetailedPageItem", response);
-  }
-
-//   console.log("26ProductDetailedPageItem", productSize.split(","));
+  };
 
   return (
     <div className="flex flex-row items-start justify-start h-[550px]  pr-9 transition transform hover:scale-105 duration-300 shadow-lg rounded-xl">
-      {/* <div className="flex flex-row items-start justify-start  pr-9"> */}
       <img
         src={productImage}
         alt={productName}
@@ -62,14 +65,14 @@ const ProductDetailedPageItem = (props) => {
         <h4 className="text-[gray] font-medium text-[16px]">
           {productPrice}/-
         </h4>
-        <hr className="border-dashed w-full text-[gray]"/>
+        <hr className="border-dashed w-full text-[gray]" />
         <h3 className="text-[#494949] font-medium text-[16px]">
           {productDescription}
         </h3>
         <h3 className="text-[#494949] font-medium text-[16px]">
-          Status: <span className="text-[#000000]">{productStock}</span> 
+          Status: <span className="text-[#000000]">{productStock}</span>
         </h3>
-        <hr className="border-dashed w-full text-[gray]"/>
+        <hr className="border-dashed w-full text-[gray]" />
         <h3 className="text-[#494949] font-medium text-[16px]">Sizes</h3>
         <div className="flex flex-row items-center bg-none box-border">
           {sizes.map((size) => (
@@ -79,7 +82,8 @@ const ProductDetailedPageItem = (props) => {
               sx={{
                 margin: "0px 0px 0px 0px",
                 width: "30px",
-                backgroundColor: selectedProductSize === size ? "#000000" : "transparent",
+                backgroundColor:
+                  selectedProductSize === size ? "#000000" : "transparent",
                 color: selectedProductSize === size ? "#ffffff" : "#000000",
                 borderRadius: "50%",
                 padding: "0px 0px 0px 0px",
@@ -92,10 +96,11 @@ const ProductDetailedPageItem = (props) => {
             </CustomButton>
           ))}
         </div>
-        
-        <CustomButton onClick={onAddProductToCart} sx={{ marginTop: "30px" }}>Add To Cart</CustomButton>
+
+        <CustomButton onClick={onAddProductToCart} sx={{ marginTop: "30px" }}>
+          Add To Cart
+        </CustomButton>
       </div>
-      {/* </div> */}
     </div>
   );
 };

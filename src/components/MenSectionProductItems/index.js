@@ -1,16 +1,9 @@
 import CustomButton from "../CustomButton";
 import { Link } from "react-router-dom";
 
-import "./index.css"; 
-
 const MenSectionProductItems = (props) => {
   const { productDetails } = props;
-  const {
-    productId,
-    productImage,
-    productName,
-    productPrice,
-  } = productDetails;
+  const { productId, productImage, productName, productPrice } = productDetails;
   return (
     <li className="flex flex-col m-[20px] items-start justify-start w-[300px] transition transform hover:scale-105 duration-300 shadow-lg rounded-xl">
       <img
@@ -26,13 +19,12 @@ const MenSectionProductItems = (props) => {
       </div>
       <Link to={`/product/${productId}`} className="w-full list-none">
         <CustomButton
-          sx={{ 
+          sx={{
             width: "100%",
             borderBottomLeftRadius: "12px",
             borderBottomRightRadius: "12px",
             borderTopRightRadius: "0",
             borderTopLeftRadius: "0",
-
           }}
         >
           View Details

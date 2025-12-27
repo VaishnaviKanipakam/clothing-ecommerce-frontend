@@ -7,11 +7,10 @@ import CustomButton from "../CustomButton";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-
 import "./index.css";
 
 const Registration = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,7 +32,7 @@ const Registration = () => {
         value={name}
         placeholder="John Doe"
         onChange={(e) => setName(e.target.value)}
-        icon={<PermIdentityOutlinedIcon sx={{ fontSize: "20px" }}/>}
+        icon={<PermIdentityOutlinedIcon sx={{ fontSize: "20px" }} />}
       />
     );
   };
@@ -47,7 +46,7 @@ const Registration = () => {
         value={email}
         placeholder="johndoe@emample.com"
         onChange={(e) => setEmail(e.target.value)}
-        icon={<EmailOutlinedIcon sx={{ fontSize: "20px" }}/>}
+        icon={<EmailOutlinedIcon sx={{ fontSize: "20px" }} />}
       />
     );
   };
@@ -61,7 +60,7 @@ const Registration = () => {
         value={password}
         placeholder="Atleast 8 charecters"
         onChange={(e) => setPassword(e.target.value)}
-        icon={<KeyOutlinedIcon sx={{ fontSize: "20px" }}/>}
+        icon={<KeyOutlinedIcon sx={{ fontSize: "20px" }} />}
       />
     );
   };
@@ -75,18 +74,17 @@ const Registration = () => {
         value={confirmPassword}
         placeholder="Atleast 8 charecters"
         onChange={(e) => setconfirmPassword(e.target.value)}
-        icon={<KeyOutlinedIcon sx={{ fontSize: "20px" }}/>}
+        icon={<KeyOutlinedIcon sx={{ fontSize: "20px" }} />}
       />
     );
   };
 
-
-  const onSubmitRegistrationForm = async event => {
-    event.preventDefault()
+  const onSubmitRegistrationForm = async (event) => {
+    event.preventDefault();
     const url = "http://localhost:5000/registration";
-        const userDetails = {name, email, password, confirmPassword}
-   
-        const options = {
+    const userDetails = { name, email, password, confirmPassword };
+
+    const options = {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -95,8 +93,7 @@ const Registration = () => {
       body: JSON.stringify(userDetails),
     };
 
-    const response = await fetch(url, options)
-    console.log("89RegistraionResponse", response)
+    const response = await fetch(url, options);
     if (response.ok === true) {
       const successData = await response.json();
       onSubmitSuccess();
@@ -111,12 +108,9 @@ const Registration = () => {
       setErrorMessage(errorData);
       setMessage(false);
     }
+  };
 
-  }
-
-    const messageClassname = message ? "success-message" : "error-message";
-
-
+  const messageClassname = message ? "success-message" : "error-message";
 
   return (
     <div className="registration-container">
@@ -151,7 +145,7 @@ const Registration = () => {
             Create Account
           </CustomButton>
         </div>
-         <p className="text-[#000000] font-georgia mt-8 text-base">
+        <p className="text-[#000000] font-georgia mt-8 text-base">
           Already have account?{" "}
           <Link to="/login">
             <span className="text-blue-600 underline font-medium">Login</span>

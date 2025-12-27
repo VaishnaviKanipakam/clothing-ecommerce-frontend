@@ -7,20 +7,19 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import KeyOutlinedIcon from "@mui/icons-material/KeyOutlined";
 import Cookies from "js-cookie";
 
-
-import "./index.css"
+import "./index.css";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-   const [message, setMessage] = useState();
+  const [message, setMessage] = useState();
   const [errorMessage, setErrorMessage] = useState("");
 
   const onSubmitSuccess = (token) => {
-         Cookies.set("jwt_token", token, { expires: 5 });
-        navigate("/dashboard")
-  }
+    Cookies.set("jwt_token", token, { expires: 5 });
+    navigate("/dashboard");
+  };
 
   const renderEmailField = () => {
     return (
@@ -50,9 +49,9 @@ const LoginPage = () => {
     );
   };
 
-  const onSubmitLoginForm = async event => {
-    event.preventDefault()
-    const loginDetails = {password, email}
+  const onSubmitLoginForm = async (event) => {
+    event.preventDefault();
+    const loginDetails = { password, email };
     const url = "http://localhost:5000/login";
 
     const options = {
@@ -65,31 +64,27 @@ const LoginPage = () => {
     };
 
     const response = await fetch(url, options);
-    console.log("58LoginResponse", response);
     if (response.ok === true) {
       const successData = await response.json();
-      console.log("189Login", successData)
       onSubmitSuccess(successData.token);
       localStorage.setItem("user", JSON.stringify(successData));
       setEmail("");
       setPassword("");
-      setErrorMessage("")
-      setMessage(true)
+      setErrorMessage("");
+      setMessage(true);
     } else if (response.ok === false) {
       const errorData = await response.json();
-      console.log("198Login", errorData);
       setErrorMessage(errorData);
       setMessage(false);
     }
-  }
+  };
 
-    const messageClassname = message ? "success-message" : "error-message";
-  
+  const messageClassname = message ? "success-message" : "error-message";
 
   return (
     <div className="login-container">
       <form
-           onSubmit={onSubmitLoginForm}
+        onSubmit={onSubmitLoginForm}
         className="flex flex-col box-border items-center justify-center p-8 bg-[#ffffff] w-fit rounded-xl shadow-2xl"
       >
         <h1 className="text-[#000000] font-extrabold text-3xl mb-3">Login</h1>
@@ -123,7 +118,7 @@ const LoginPage = () => {
           </Link>
         </p>
       </form>
-    </div> 
+    </div>
   );
 };
 

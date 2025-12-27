@@ -2,7 +2,6 @@ import LandingPageHeader from "../LandingPageHeader";
 import CustomButton from "../CustomButton";
 import { Link } from "react-router-dom";
 
-
 import "./index.css";
 
 const LandingPage = () => {
@@ -21,7 +20,6 @@ const LandingPage = () => {
       <Link to="/register">
         <CustomButton>Create Account</CustomButton>
       </Link>
-      
     </div>
   );
 };

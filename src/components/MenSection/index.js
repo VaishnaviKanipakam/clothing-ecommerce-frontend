@@ -24,10 +24,8 @@ const MenSection = () => {
     };
 
     const response = await fetch(url, options);
-    console.log("25MenSectionRsponse", response);
     if (response.ok === true) {
       const data = await response.json();
-      console.log("28MenSection", data);
       const updatedData = data.map((eachProduct) => ({
         productId: eachProduct.product_id,
         productCategory: eachProduct.product_category,
@@ -46,23 +44,23 @@ const MenSection = () => {
     getAllProducts();
   }, []);
 
-  const filteredResult = getProductsList.filter(eachProduct => (
-    eachProduct.productName.toLowerCase().includes(searchInput.toLocaleLowerCase())
-  ))
+  const filteredResult = getProductsList.filter((eachProduct) =>
+    eachProduct.productName
+      .toLowerCase()
+      .includes(searchInput.toLocaleLowerCase())
+  );
 
   const renderSearchInputField = () => {
-    return(
-        <CustomInput
-      type="search"
-      value={searchInput}
-      placeholder="Product Name"
-      onChange={(e) => setSearchInput(e.target.value)}
-      icon={<SearchIcon sx={{ fontSize: "20px" }} />}
-    />
-    )
-    
+    return (
+      <CustomInput
+        type="search"
+        value={searchInput}
+        placeholder="Product Name"
+        onChange={(e) => setSearchInput(e.target.value)}
+        icon={<SearchIcon sx={{ fontSize: "20px" }} />}
+      />
+    );
   };
-
 
   return (
     <div className="men-section-contianer">
