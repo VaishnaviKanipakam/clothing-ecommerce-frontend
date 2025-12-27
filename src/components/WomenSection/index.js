@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import WomenSectionProductItems from "../WomenSectionProductItems";
 import CustomInput from "../CustomInput";
 import SearchIcon from "@mui/icons-material/Search";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import "./index.css";
 
@@ -40,6 +41,14 @@ const WomenSection = () => {
     }
   };
 
+  const loader = () => {
+    return (
+      <div>
+        <CircularProgress color="black" />
+      </div>
+    );
+  };
+
   useEffect(() => {
     getAllProducts();
   }, []);
@@ -68,14 +77,20 @@ const WomenSection = () => {
         <div>{renderSearchInputField()}</div>
       </div>
 
-      <ul className="list-none grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-[50px]">
-        {filteredResult.map((eachProduct) => (
-          <WomenSectionProductItems
-            key={eachProduct.productId}
-            productDetails={eachProduct}
-          />
-        ))}
-      </ul>
+      {getProductsList.length === 0 ? (
+        <div className="flex flex-col items-center justify-center h-full w-full mt-[50px]">
+          {loader()}
+        </div>
+      ) : (
+        <ul className="list-none grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-[50px]">
+          {filteredResult.map((eachProduct) => (
+            <WomenSectionProductItems
+              key={eachProduct.productId}
+              productDetails={eachProduct}
+            />
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
