@@ -97,9 +97,19 @@ const ProductDetailedPageItem = (props) => {
           ))}
         </div>
 
-        <CustomButton onClick={onAddProductToCart} sx={{ marginTop: "30px" }}>
-          Add To Cart
-        </CustomButton>
+        {selectedProductSize === null ? (
+          <CustomButton
+            disabled
+            onClick={onAddProductToCart}
+            sx={{ marginTop: "30px" }}
+          >
+            Add To Cart
+          </CustomButton>
+        ) : (
+          <CustomButton onClick={onAddProductToCart} sx={{ marginTop: "30px" }}>
+            Add To Cart
+          </CustomButton>
+        )}
       </div>
     </div>
   );
