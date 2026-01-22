@@ -8,7 +8,7 @@ const Footer = () => {
           <h2 className="text-xl font-bold mb-3">Clothing Website</h2>
           <p className="text-sm text-gray-400">
             Your one-stop shop for trendy men, women and kids clothing.
-          </p>
+          </p>     
         </div>
 
         <div className="space-y-2">

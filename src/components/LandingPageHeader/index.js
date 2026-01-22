@@ -1,5 +1,4 @@
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import SearchIcon from "@mui/icons-material/Search";
 import "./index.css";
 
 const LandingPageHeader = () => {
