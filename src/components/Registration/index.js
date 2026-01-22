@@ -6,6 +6,7 @@ import KeyOutlinedIcon from "@mui/icons-material/KeyOutlined";
 import CustomButton from "../CustomButton";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import "./index.css";
 
@@ -18,6 +19,7 @@ const Registration = () => {
   const [message, setMessage] = useState();
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmitSuccess = () => {
     navigate("/login");
@@ -81,6 +83,7 @@ const Registration = () => {
 
   const onSubmitRegistrationForm = async (event) => {
     event.preventDefault();
+    setIsLoading(true)
     const url = "https://clothing-ecommerce-backend-f011.onrender.com/registration";
     const userDetails = { name, email, password, confirmPassword };
 
@@ -107,10 +110,19 @@ const Registration = () => {
       const errorData = response.json();
       setErrorMessage(errorData);
       setMessage(false);
+      setIsLoading(false)
     }
   };
 
   const messageClassname = message ? "success-message" : "error-message";
+
+  const loader = () => {
+      return (
+        <div>
+          <CircularProgress color="black" size={25} sx={{color: "#ffffff", fontWeight: "bold"}}/>
+        </div>
+      );
+    };
 
   return (
     <div className="registration-container">
@@ -142,7 +154,7 @@ const Registration = () => {
               fontSize: "15px",
             }}
           >
-            Create Account
+            {isLoading ? loader() : "Create Account"}
           </CustomButton>
         </div>
         <p className="text-[#000000] font-georgia mt-8 text-base">
