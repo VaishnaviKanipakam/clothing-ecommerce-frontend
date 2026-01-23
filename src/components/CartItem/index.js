@@ -1,7 +1,7 @@
 import CustomButton from "../CustomButton";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback} from "react";
 import CartContext from "../../context/CartContext";
 import Cookies from "js-cookie";
 
@@ -23,7 +23,7 @@ const CartItem = (props) => {
     useState(productQuantity);
   const { getCartItemsCount } = useContext(CartContext);
 
-  const updateCartItem = async () => {
+  const updateCartItem = useCallback(async () => {
     const cartUpdateDetails = { productQuantityCount };
     const url = `https://clothing-ecommerce-backend-f011.onrender.com/update_cart_item?user_id=${userId}&cart_id=${cartId}&product_id=${productId}&product_category=${productCategory}`;
 
@@ -40,9 +40,9 @@ const CartItem = (props) => {
     if (updateCartItemResponse.ok === true) {
       getcartItems();
     }
-  };
+  }, [productQuantityCount, jwtToken]);
 
-  const deleteCartItem = async () => {
+  const deleteCartItem = useCallback(async () => {
     const url = `https://clothing-ecommerce-backend-f011.onrender.com/delete_cart_item?user_id=${userId}&cart_id=${cartId}&product_id=${productId}&product_category=${productCategory}`;
 
     const options = {
@@ -59,7 +59,7 @@ const CartItem = (props) => {
       getcartItems();
       getCartItemsCount();
     }
-  };
+  }, [jwtToken]);
 
   const totalPrice = Number(productPrice) * productQuantityCount;
 
@@ -69,7 +69,7 @@ const CartItem = (props) => {
     } else {
       updateCartItem();
     }
-  }, [productQuantityCount]);
+  }, [productQuantityCount, deleteCartItem, updateCartItem]);
 
   return (
     <li className="flex flex-row items-center justify-between shadow-lg rounded-xl w-full h-fit pt-3 pb-3 pl-5 pr-5 mb-4 box-border">

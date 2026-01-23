@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Cookies from "js-cookie";
 import KidsSectionProductItems from "../KidsSectionProductItems";
 import CustomInput from "../CustomInput";
@@ -12,7 +12,7 @@ const KidsSection = () => {
   const [searchInput, setSearchInput] = useState("");
   const jwtToken = Cookies.get("jwt_token");
 
-  const getAllProducts = async () => {
+  const getAllProducts = useCallback(async () => {
     const url = `https://clothing-ecommerce-backend-f011.onrender.com/products?product_category=Kids`;
 
     const options = {
@@ -39,11 +39,11 @@ const KidsSection = () => {
       }));
       setGetProductsList(updatedData);
     }
-  };
+  }, [jwtToken]);
 
   useEffect(() => {
     getAllProducts();
-  }, []);
+  }, [getAllProducts]);
 
   
   const loader = () => {
