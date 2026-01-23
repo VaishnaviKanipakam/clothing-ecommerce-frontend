@@ -40,7 +40,7 @@ const CartItem = (props) => {
     if (updateCartItemResponse.ok === true) {
       getcartItems();
     }
-  }, [productQuantityCount, jwtToken]);
+  }, [productQuantityCount, userId, cartId, productId, productCategory, jwtToken, getcartItems]);
 
   const deleteCartItem = useCallback(async () => {
     const url = `https://clothing-ecommerce-backend-f011.onrender.com/delete_cart_item?user_id=${userId}&cart_id=${cartId}&product_id=${productId}&product_category=${productCategory}`;
@@ -59,7 +59,7 @@ const CartItem = (props) => {
       getcartItems();
       getCartItemsCount();
     }
-  }, [jwtToken]);
+  }, [userId, cartId, productId, productCategory, jwtToken, getcartItems, getCartItemsCount]);
 
   const totalPrice = Number(productPrice) * productQuantityCount;
 

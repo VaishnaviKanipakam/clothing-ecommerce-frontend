@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Cookies from "js-cookie";
 import ProductDetailedPageItem from "../ProductDetailedPageItem";
 
@@ -10,7 +10,7 @@ const ProductDetailPage = () => {
   const [getProductData, setGetProductData] = useState([]);
   const jwtToken = Cookies.get("jwt_token");
 
-  const getSingleProductData = async () => {
+  const getSingleProductData = useCallback(async () => {
     const url = `https://clothing-ecommerce-backend-f011.onrender.com/product?product_id=${id}`;
 
     const options = {
@@ -36,11 +36,11 @@ const ProductDetailPage = () => {
       }));
       setGetProductData(updatedData);
     }
-  };
+  }, [id, jwtToken]);
 
   useEffect(() => {
     getSingleProductData();
-  }, []);
+  }, [getSingleProductData]);
 
   return (
     <div className="product-detail-page-container">

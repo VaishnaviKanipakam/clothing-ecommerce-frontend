@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import Avatar from "@mui/material/Avatar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import "./index.css";
 
@@ -11,7 +11,7 @@ const MyProfilePage = () => {
   const jwtToken = Cookies.get("jwt_token");
   const [allOrdersList, setAllOrdersList] = useState([]);
 
-  const getOrdersList = async () => {
+  const getOrdersList = useCallback(async () => {
     const url = `https://clothing-ecommerce-backend-f011.onrender.com/get_orders?user_id=${userId}`;
 
     const options = {
@@ -34,7 +34,7 @@ const MyProfilePage = () => {
       }));
       setAllOrdersList(updatedData);
     }
-  };
+  }, [userId, jwtToken]);
 
   const dateTime = (orderDate) => {
     return new Date(orderDate).toLocaleString("en-IN", {
@@ -48,7 +48,7 @@ const MyProfilePage = () => {
 
   useEffect(() => {
     getOrdersList();
-  }, []);
+  }, [getOrdersList]);
 
   return (
     <div className="my-profile-page-container">

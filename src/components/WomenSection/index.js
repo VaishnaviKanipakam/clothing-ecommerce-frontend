@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import Cookies from "js-cookie";
 import WomenSectionProductItems from "../WomenSectionProductItems";
 import CustomInput from "../CustomInput";
@@ -12,7 +12,7 @@ const WomenSection = () => {
   const [searchInput, setSearchInput] = useState("");
   const jwtToken = Cookies.get("jwt_token");
 
-  const getAllProducts = async () => {
+  const getAllProducts = useCallback(async () => {
     const url = `https://clothing-ecommerce-backend-f011.onrender.com/products?product_category=Women`;
 
     const options = {
@@ -39,7 +39,7 @@ const WomenSection = () => {
       }));
       setGetProductsList(updatedData);
     }
-  };
+  }, [jwtToken]);
 
   const loader = () => {
     return (
@@ -51,7 +51,7 @@ const WomenSection = () => {
 
   useEffect(() => {
     getAllProducts();
-  }, []);
+  }, [getAllProducts]);
 
   const filteredResult = getProductsList.filter((eachProduct) =>
     eachProduct.productName

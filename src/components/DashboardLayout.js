@@ -1,5 +1,5 @@
 import DashboardHeader from "./DashboardHeader";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback} from "react";
 import CartContext from "../context/CartContext";
 import Cookies from "js-cookie";
 import Footer from "./Footer";
@@ -10,7 +10,7 @@ const DashboardLayout = ({ children }) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const userId = user?.result?.[0]?.user_id;
 
-  const getCartItemsCount = async () => {
+  const getCartItemsCount = useCallback(async () => {
     const url = `https://clothing-ecommerce-backend-f011.onrender.com/cart_items_count?user_id=${userId}`;
 
     const options = {
@@ -26,11 +26,11 @@ const DashboardLayout = ({ children }) => {
       const cartItemsCountData = await cartItemsCountResponse.json();
       setCartCount(cartItemsCountData[0]?.cart_items_count || 0);
     }
-  };
+  }, [userId, jwtToken]);
 
   useEffect(() => {
     getCartItemsCount();
-  }, []);
+  }, [getCartItemsCount]);
 
   return (
     <CartContext.Provider
