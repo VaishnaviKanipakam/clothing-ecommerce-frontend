@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Cookies from "js-cookie";
 import CartItem from "../CartItem";
 import CustomButton from "../CustomButton";
@@ -36,7 +36,7 @@ const Cart = () => {
     setOpen(false);
   };
 
-  const getcartItems = async () => {
+  const getcartItems = useCallback( async () => {
     const url = `https://clothing-ecommerce-backend-f011.onrender.com/cart_items?user_id=${userId}`;
 
     const options = {
@@ -63,7 +63,7 @@ const Cart = () => {
       }));
       setGetCartItemsList(updatedData);
     }
-  };
+  }, [userId, jwtToken]);
 
   const cartTotalPrice = getCartItemsList.reduce(
     (sum, price) => sum + price.productPrice * price.productQuantity,
@@ -150,7 +150,7 @@ const Cart = () => {
 
   useEffect(() => {
     getcartItems();
-  }, []);
+  }, [getcartItems]);
 
   return getCartItemsList.length === 0 ? (
     <div className="cart-container">
